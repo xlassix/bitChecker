@@ -15,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _currencyName = "USD";
   Map data;
   Map exchangeData;
+  double selectedExchangeRate;
 
   CoinData instance = CoinData(coinNames: kCryptoList);
 
@@ -32,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var temp = await instance.getCurrentPrices();
     print(exchangeData[value]);
     setState(() {
+      selectedExchangeRate = exchangeData[value];
       _currencyName = value;
       data = temp;
     });
@@ -53,8 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
               print(element);
               return PriceContainer(
                 unit: element.key,
-                value: element.value,
-                metric: "USD",
+                value:
+                    exchangeData[_currencyName] == null || element.value == "?"
+                        ? "?"
+                        : (double.parse(element.value) *
+                                exchangeData[_currencyName])
+                            .toStringAsFixed(4),
+                metric: _currencyName,
               );
             }).toList(),
           ),

@@ -18,8 +18,7 @@ class CoinData {
       if (response.statusCode == 200) {
         Map data = jsonDecode(response.body)['data']['market_data'];
         print(data);
-        print(data['price_usd'].toStringAsFixed(4));
-        return data['price_usd'].toStringAsFixed(4);
+        return data['price_usd'].toString();
       } else {
         return "?";
       }

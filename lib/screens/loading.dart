@@ -42,7 +42,11 @@ class _LoadingState extends State<Loading> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text("Welcome bitTracker"),
+          Text(
+            "Welcome bitTracker",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 30),
+          ),
           SizedBox(
             height: 20.0,
           ),
