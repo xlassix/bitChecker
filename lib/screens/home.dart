@@ -1,5 +1,6 @@
 import 'package:bit_tracker/components/currencySelector.dart';
 import 'package:bit_tracker/components/priceContainer.dart';
+import 'package:bit_tracker/utils/coinData.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -8,7 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String _currencyName="USD";
+  String _currencyName = "USD";
 
   void updateCurrency(String value) {
     setState(() {
@@ -18,6 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    CoinData instance = CoinData(coinNames: ["67", "ETH", "btc"]);
+    instance.getCurrentPrices();
     return Scaffold(
       appBar: AppBar(
         title: Text("BitTracker"),
@@ -30,7 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
             value: "23424",
             metric: "USD",
           ),
-          CurrencySelector(currentValue: _currencyName, onPress: updateCurrency,)
+          CurrencySelector(
+            currentValue: _currencyName,
+            onPress: updateCurrency,
+          )
         ],
       ),
     );
