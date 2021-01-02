@@ -20,7 +20,6 @@ const List<String> kCurrenciesList = [
   'INR',
   'JPY',
   'MXN',
-  "NGN",
   'NOK',
   'NZD',
   'PLN',
