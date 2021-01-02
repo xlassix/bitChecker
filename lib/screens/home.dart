@@ -2,6 +2,7 @@ import 'package:bit_tracker/components/currencySelector.dart';
 import 'package:bit_tracker/components/priceContainer.dart';
 import 'package:bit_tracker/utils/coinData.dart';
 import 'package:bit_tracker/utils/constants.dart';
+import 'package:bit_tracker/utils/dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   CoinData instance = CoinData(coinNames: kCryptoList);
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -30,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void updateCurrency(String value) async {
+    Dialogs.showLoadingDialog(context, _keyLoader);
+
     var temp = await instance.getCurrentPrices();
     print(exchangeData[value]);
     setState(() {
@@ -37,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _currencyName = value;
       data = temp;
     });
+    Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
   }
 
   @override
