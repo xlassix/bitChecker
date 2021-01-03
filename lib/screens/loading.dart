@@ -19,7 +19,7 @@ class _LoadingState extends State<Loading> {
         return getData(instance);
       }
       print(data);
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return HomeScreen(data: data);
       }));
     } catch (e) {
